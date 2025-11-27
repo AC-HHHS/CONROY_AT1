@@ -76,36 +76,11 @@ main p{
     align-items: center;
 }
 
-main img{
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    width: 150px;
-    height: 150px;
-    background-image: url('../static/loginLogo.png');
-    background-position: center;
-    background-size: cover;
-    margin-top: 20px;
-    border-radius: 50%;
-}
-
 main h1,h2{
     text-align: center;
     margin-top: 20%;
 }
 
-main .showUser{
-    background-image: url('../static/userLogo.png');
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    width: 200px;
-    height: 200px;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    margin-top: 20%;
-}
 
 main .sent{
     color: rgb(7, 105, 0);
