@@ -31,5 +31,29 @@ def home():
 
     return render_template('userHome.html', first_name=first_name, last_name=last_name, email=email)
 
+@app.route('/signUp')
+def signUP():
+    return render_template('signUp.html')
+
+@app.route('/add_user', methods=['POST'])
+def add_user():
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    connection = sqlite3.connect('LoginData.db')
+    cursor = connection.cursor()
+
+    ans = cursor.execute("SELECT * from USERS where email=? AND password=?",(email,password)).fetchall()
+    if len(ans) > 0:
+        connection.close()
+        return render_template('login.html')
+    else:
+        cursor.execute("INSERT INTO USERS(first_name,last_name,email,password)values(?,?,?,?)",(first_name,last_name,email,password))
+        connection.commit()
+        connection.close()
+        return render_template('login.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
