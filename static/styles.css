@@ -144,3 +144,18 @@ main .mt{
         height: 70px;
     }
 }
+
+button {
+    background-color: lightsalmon;
+    color: grey;
+    border: none;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: salmon;
+}

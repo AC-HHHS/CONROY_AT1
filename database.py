@@ -6,12 +6,13 @@ cursor = connection.cursor()
 cmd1 = """CREATE TABLE IF NOT EXISTS USERS(first_name varchar(50),
                                           last_name varchar(50),
                                           email varchar(50) primary key,
-                                          password varchar(50) not null)"""
+                                          password varchar(50) not null,
+                                          fav_animal varchar(50) not null)"""
 
 cursor.execute(cmd1)
 
-cmd2 = """INSERT INTO USERS(first_name, last_name, email, password) values
-                ('tester','tester','tester@gmail.com','tester')"""
+cmd2 = """INSERT INTO USERS(first_name, last_name, email, password, fav_animal) values
+                ('tester','tester','tester@gmail.com','tester', 'test')"""
 cursor.execute(cmd2)
 
 connection.commit()
