@@ -4,7 +4,7 @@ connection = sqlite3.connect('collectedData.db')
 cursor = connection.cursor()
 
 cmd3 = """CREATE TABLE IF NOT EXISTS DATA(satisfaction boolean,
-                                          bike)"""
+                                          quiz_attemps INTEGER DEFAULT 0)"""
 
 cursor.execute(cmd3)
 

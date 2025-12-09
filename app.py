@@ -1,28 +1,24 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
-import os 
+import os
 from question import questions
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-questions = [
-        {
-            "question": "What is the capital of France?",
-            "options": ["London", "Paris", "Berlin", "Rome"],
-            "correct_answer_index": 1
-        },
-        {
-            "question": "Which planet is known as the Red Planet?",
-            "options": ["Earth", "Mars", "Jupiter", "Venus"],
-            "correct_answer_index": 1
-        }
-    ]
+# simple answer key (you can build this automatically from `questions` later)
+ANSWER_KEY = {
+    "q1": "Paris",
+    "q2": "4"
+}
+
 
 @app.route('/')
 def login():
     return render_template('login.html')
 
-@app.route('/login_validation' , methods=['POST'])
+
+@app.route('/login_validation', methods=['POST'])
 def login_validation():
     middle_name = request.form.get('middle_name')
     email = request.form.get('email')
@@ -31,12 +27,22 @@ def login_validation():
     connection = sqlite3.connect('LoginData.db')
     cursor = connection.cursor()
 
-    user = cursor.execute("SELECT * FROM USERS WHERE middle_name=? and email=? and fav_animal=?",(middle_name,email,fav_animal)).fetchall()
-    if len(user) > 0 :
-        return redirect(f'/home?first_name={user[0][0]}&last_name={user[0][1]}&email={user[0][2]}')
+    user = cursor.execute(
+        "SELECT * FROM USERS WHERE middle_name=? AND email=? AND fav_animal=?",
+        (middle_name, email, fav_animal)
+    ).fetchall()
+
+    connection.close()
+
+    if len(user) > 0:
+        # adjust indices if your DB columns are ordered differently
+        return redirect(
+            url_for('home', first_name=user[0][0], last_name=user[0][1], email=user[0][2])
+        )
     else:
         return redirect('/')
-    
+
+
 @app.route('/home')
 def home():
     first_name = request.args.get('first_name')
@@ -45,9 +51,11 @@ def home():
 
     return render_template('userHome.html', first_name=first_name, last_name=last_name, email=email)
 
+
 @app.route('/signUp')
 def signUP():
     return render_template('signUp.html')
+
 
 @app.route('/add_user', methods=['POST'])
 def add_user():
@@ -61,35 +69,78 @@ def add_user():
     connection = sqlite3.connect('LoginData.db')
     cursor = connection.cursor()
 
-    ans = cursor.execute("SELECT * from USERS where middle_name=? AND email=? AND fav_animal=?",(middle_name,email,fav_animal)).fetchall()
+    ans = cursor.execute(
+        "SELECT * FROM USERS WHERE middle_name=? AND email=? AND fav_animal=?",
+        (middle_name, email, fav_animal)
+    ).fetchall()
+
     if len(ans) > 0:
         connection.close()
         return render_template('login.html')
     else:
-        cursor.execute("INSERT INTO USERS(first_name,middle_name,last_name,email,password,fav_animal)values(?,?,?,?,?,?)",(first_name,middle_name,last_name,email,password,fav_animal))
+        cursor.execute(
+            "INSERT INTO USERS(first_name,middle_name,last_name,email,password,fav_animal) VALUES (?,?,?,?,?,?)",
+            (first_name, middle_name, last_name, email, password, fav_animal)
+        )
         connection.commit()
         connection.close()
         return render_template('login.html')
-    
+
+
 @app.route('/faux')
 def faux():
     return render_template('hint.html')
 
-@app.route('/quoz')
-def quiz():
-        return redirect(url_for('bikeQuiz.html', questions=questions))
 
-@app.route('/submit_quiz', methods=['POST'])
-def submit_quiz():
+# show the quiz page (loads questions from question.questions)
+@app.route('/quoz')
+def quoz():
+    return render_template('bikeQuiz.html', questions=questions)
+
+
+# handle GET+POST for the quiz. function name is unique (quiz_view)
+@app.route('/quiz', methods=["GET", "POST"])
+def quiz_view():
+    if request.method == "POST":
+        
+        # gather answers; if you have dynamic question ids, build this from questions
+        user_answers = {
+            "q1": request.form.get("q1"),
+            "q2": request.form.get("q2")
+        }
+
+        feedback = {}
+        results = {}
         score = 0
-        user_answers = {}
-        for i, question_data in enumerate(questions):
-            selected_option = request.form.get(f'question_{i}')
-            if selected_option is not None:
-                user_answers[i] = int(selected_option)
-                if int(selected_option) == question_data['correct_answer_index']:
-                    score += 1
-        return render_template('results.html', score=score, total_questions=len(questions), user_answers=user_answers, questions=questions)
+        total_questions = len(ANSWER_KEY)
+
+        for q, correct in ANSWER_KEY.items():
+            if user_answers.get(q) == correct:
+                feedback[q] = f"{q.upper()} is correct!"
+                results[q] = "correct"
+                score += 1
+            else:
+                feedback[q] = f"{q.upper()} is incorrect."
+                results[q] = "incorrect"
+
+        if score == total_questions:
+            return redirect(url_for("fish"))
+
+        return render_template(
+            "bikeQuiz.html",
+            results=results,
+            feedback=feedback,
+            score=score,
+            questions=questions
+        )
+
+    # GET request: render quiz with questions
+    return render_template('bikeQuiz.html', questions=questions)
+
+
+@app.route('/fish')
+def fish():
+    return render_template('fish1.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

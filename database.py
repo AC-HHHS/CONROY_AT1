@@ -13,7 +13,7 @@ cmd1 = """CREATE TABLE IF NOT EXISTS USERS(first_name varchar(50),
 cursor.execute(cmd1)
 
 cmd2 = """INSERT INTO USERS(first_name, middle_name, last_name, email, password, fav_animal) values
-                ('tester','tester', 'tester', tester@gmail.com','tester', 'test')"""
+                ('tester', 'tester', 'tester', 'tester@gmail.com', 'tester', 'test')"""
 cursor.execute(cmd2)
 
 connection.commit()
