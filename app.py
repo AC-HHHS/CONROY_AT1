@@ -56,6 +56,12 @@ def home():
 def signUP():
     return render_template('signUp.html')
 
+@app.route("/fischOne")
+def fish_one():
+    fish_one = request.form.get('fisch_one')
+
+    connection = sqlite3.connect('CollectedData.db')
+
 
 @app.route('/add_user', methods=['POST'])
 def add_user():

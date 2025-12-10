@@ -1,15 +1,18 @@
 import sqlite3
 
-connection = sqlite3.connect('collectedData.db')
+connection = sqlite3.connect('CollectedData.db')
 cursor = connection.cursor()
 
-cmd3 = """CREATE TABLE IF NOT EXISTS DATA(satisfaction boolean,
-                                          quiz_attemps INTEGER DEFAULT 0)"""
+cmd3 = """CREATE TABLE IF NOT EXISTS DATA(fisch_one varchar(5) primary key,
+                                            fisch_two varchar(5) not null,
+                                            fisch_three varchar(5) not null,
+                                            fisch_four varchar(5) not null,
+                                            fisch_five varchar(50) not null)"""
 
 cursor.execute(cmd3)
 
-cmd4 = """INSERT INTO DATA(satisfaction, bike) values
-                ('True', 'testing')"""
+cmd4 = """INSERT INTO DATA(fisch_one, fisch_two, fisch_three, fisch_four, fisch_five) values
+                ('True', 'True', 'True', 'True', 'True')"""
 cursor.execute(cmd4)
 
 connection.commit()
