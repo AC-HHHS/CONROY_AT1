@@ -20,27 +20,48 @@ def login():
 
 @app.route('/login_validation', methods=['POST'])
 def login_validation():
+    # Get form input
     middle_name = request.form.get('middle_name')
     email = request.form.get('email')
     fav_animal = request.form.get('fav_animal')
 
+    # Debug (optional)
+    print("Login attempt:", middle_name, email, fav_animal)
+
+    # Connect to database
     connection = sqlite3.connect('LoginData.db')
     cursor = connection.cursor()
 
-    user = cursor.execute(
-        "SELECT * FROM USERS WHERE middle_name=? AND email=? AND fav_animal=?",
+    # Query for user
+    cursor.execute(
+        """SELECT first_name, last_name, email, is_admin
+           FROM USERS
+           WHERE middle_name=? AND email=? AND fav_animal=?""",
         (middle_name, email, fav_animal)
-    ).fetchall()
-
+    )
+    user = cursor.fetchone()
     connection.close()
 
-    if len(user) > 0:
-        # adjust indices if your DB columns are ordered differently
-        return redirect(
-            url_for('home', first_name=user[0][0], last_name=user[0][1], email=user[0][2])
-        )
+    # Check if a user was found
+    if user:
+        # Save login info in session
+        session['email'] = user[2]
+        session['is_admin'] = user[3]
+
+        # Redirect based on role
+        if user[3] == 1:
+            return redirect(url_for('admin'))
+        else:
+            return redirect(
+                url_for('home',
+                        first_name=user[0],
+                        last_name=user[1],
+                        email=user[2])
+            )
     else:
-        return redirect('/')
+        # Login failed
+        print("Login failed: user not found")
+        return redirect('/')  # or render a "login failed" page
 
 
 @app.route('/home')
@@ -51,6 +72,72 @@ def home():
 
     return render_template('userHome.html', first_name=first_name, last_name=last_name, email=email)
 
+# Credits to one MR ZEEDERBERG for this code
+@app.route("/admin")
+def admin():
+    if not session.get("is_admin"):
+        return redirect(url_for("login"))
+
+    connection = sqlite3.connect("CollectedData.db")
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM DATA")
+    data_rows = cursor.fetchall()
+    data_columns = [description[0] for description in cursor.description]
+
+    cursor.execute("SELECT first_name, last_name, email, is_admin FROM USERS")
+    users = cursor.fetchall()
+
+    connection.close()
+
+    return render_template(
+        "adminHome.html",
+        data_rows=data_rows,
+        data_columns=data_columns,
+        users=users
+    )
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
+@app.route("/make_admin/<email>")
+def make_admin(email):
+    if not session.get("is_admin"):
+        return redirect(url_for("login"))
+
+    connection = sqlite3.connection("LoginData.db")
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "UPDATE USER SET is_admin = 1 WHERE email = ?", 
+        (email,)
+    )
+
+    connection.commit()
+    connection.close()
+
+    return redirect(url_for("admin"))
+
+@app.route("/admin/users")
+def admin_users():
+    if not session.get("is_admin"):
+        return redirect(url_for('login'))
+    
+    connection = sqlite3.connect("LoginData.db")
+    cursor = connection.cursor()
+
+    users = cursor.execute(
+        "SELECT first_name, last_name, email, is_admin FROM USERS"
+    ).fetchall()
+
+    connection.close()
+
+    return render_template("admin_users.html", users=users)
+
+
+#END credits
 
 @app.route('/signUp')
 def signUP():
@@ -191,7 +278,7 @@ def fish_three():
 
     cursor.execute(
         "INSERT INTO DATA(fisch_five) VALUES (?)",
-        (fisch_five)
+        (fisch_five,)
     )
     connection.commit()
     connection.close()

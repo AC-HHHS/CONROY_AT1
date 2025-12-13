@@ -2,10 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello There</title>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 </head>
 <body>
-    
+
+<h1>Admin Dashboard</h1>
+
+<h2>Collected Data</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for column in data_columns %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data_rows %}
+                <tr>
+                    {% for item in row %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<hr>
+
+<h2>User Management</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Admin?</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    <tbody>
+            {% for u in users %}
+                <tr>
+                    <td>{{ u[0] }} {{ u[1] }}</td>
+                    <td>{{ u[2] }}</td>
+                    <td>{{ "Yes" if u[3] == 1 else "No" }}</td>
+                    <td>
+                        {% if u[3] == 0 %}
+                            <a href="{{ url_for('make_admin', email=u[2]) }}">Make Admin</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+
 </body>
 </html>

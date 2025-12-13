@@ -3,7 +3,8 @@ import sqlite3
 connection = sqlite3.connect('CollectedData.db')
 cursor = connection.cursor()
 
-cmd3 = """CREATE TABLE IF NOT EXISTS DATA(fisch_one varchar(5) primary key,
+cmd3 = """CREATE TABLE IF NOT EXISTS DATA(id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                            fisch_one varchar(5),
                                             fisch_two varchar(5),
                                             fisch_three varchar(5),
                                             fisch_four varchar(5),
