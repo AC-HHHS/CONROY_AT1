@@ -56,12 +56,6 @@ def home():
 def signUP():
     return render_template('signUp.html')
 
-@app.route("/fischOne")
-def fish_one():
-    fish_one = request.form.get('fisch_one')
-
-    connection = sqlite3.connect('CollectedData.db')
-
 
 @app.route('/add_user', methods=['POST'])
 def add_user():
@@ -147,6 +141,66 @@ def quiz_view():
 @app.route('/fish')
 def fish():
     return render_template('fish1.html')
+
+@app.route("/fischOne", methods=["POST"])
+def fish_one():
+    fisch_one = request.form.get('fisch_one')
+    fisch_two = request.form.get('fisch_two')
+
+    connection = sqlite3.connect('CollectedData.db')
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "INSERT INTO DATA(fisch_one, fisch_two) VALUES (?,?)",
+        (fisch_one, fisch_two)
+    )
+    connection.commit()
+    connection.close()
+    return render_template('sure1.html')
+
+@app.route('/fish1')
+def fish1():
+    return render_template('fish2.html')
+
+@app.route("/fischTwo", methods=["POST"])
+def fish_two():
+    fisch_three = request.form.get('fisch_three')
+    fisch_four = request.form.get('fisch_four')
+
+    connection = sqlite3.connect('CollectedData.db')
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "INSERT INTO DATA(fisch_three, fisch_four) VALUES (?,?)",
+        (fisch_three, fisch_four)
+    )
+    connection.commit()
+    connection.close()
+    return render_template('sure2.html')
+
+@app.route('/fish2')
+def fish2():
+    return render_template('fish3.html')
+
+@app.route("/fischThree", methods=["POST"])
+def fish_three():
+    fisch_five = request.form.get('fisch_five')
+
+    connection = sqlite3.connect('CollectedData.db')
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "INSERT INTO DATA(fisch_five) VALUES (?)",
+        (fisch_five)
+    )
+    connection.commit()
+    connection.close()
+    return render_template('sure3.html')
+
+@app.route('/fish3')
+def fish3():
+    return render_template('final.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

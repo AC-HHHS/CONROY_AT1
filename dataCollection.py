@@ -4,10 +4,10 @@ connection = sqlite3.connect('CollectedData.db')
 cursor = connection.cursor()
 
 cmd3 = """CREATE TABLE IF NOT EXISTS DATA(fisch_one varchar(5) primary key,
-                                            fisch_two varchar(5) not null,
-                                            fisch_three varchar(5) not null,
-                                            fisch_four varchar(5) not null,
-                                            fisch_five varchar(50) not null)"""
+                                            fisch_two varchar(5),
+                                            fisch_three varchar(5),
+                                            fisch_four varchar(5),
+                                            fisch_five varchar(50))"""
 
 cursor.execute(cmd3)
 
