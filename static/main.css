@@ -1,9 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Almendra+SC);
+
 body {
-    background-image: url(../static/fsch.jpg);
-    background-repeat: repeat-y;
+    background-image: url(../static/fish.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
 h1 {
     text-align: center;
+}
+
+h2 {
+    font-family: 'Almendra SC';
+    text-align: center;
+    text-decoration: underline;
+    
+}
+
+h3 {
+text-align: center;
 }

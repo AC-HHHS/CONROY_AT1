@@ -96,7 +96,7 @@ main .UnknownUser{
     display: flex;
     width: 200px;
     height: 200px;
-    background-image: url(../static/signup.jpeg);
+    background-image: url(../static/signup.png);
     background-position: center;
     background-size: cover;
     margin-top: 40px;

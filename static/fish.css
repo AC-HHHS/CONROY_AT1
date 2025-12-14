@@ -1,0 +1,219 @@
+@import url(https://fonts.googleapis.com/css?family=Almendra+SC);
+
+body {
+    background-image: url(../static/fish.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #96a8a1;
+    min-height: 90vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Almendra SC';
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+main form{
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+main form input{
+    border: 3px solid #808080;
+    border-radius: 15px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: normal;
+    background-color: #C0C0C0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 20px;
+    font-family: 'Almendra SC';
+}
+
+
+main form button{
+    width:280px;
+    height: 50px;
+    border-radius: 15px;
+    align-items: center;
+    box-shadow: 3px 4px 5px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    font-size: 23px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #b88a90;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    font-family: 'Almendra SC';
+}
+
+main p{
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(100, 65, 0);
+    text-align: center;
+    align-items: center;
+}
+
+main .fishFive {
+    background-image: url(../static/fsch3.jpg);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    margin-top: 20%;
+    border: 70px;
+    border-top: 40px solid #7c5d61;
+    border-left: 40px solid #b88a90;
+    border-right: 40px solid #b88a90;
+    border-bottom: 40px solid #e7b6bd;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+main .fishFour {
+    background-image: url(../static/fsch7.jpg);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    margin-top: 20%;
+    border: 70px;
+    border-top: 40px solid #6d7a75;
+    border-left: 40px solid #96a8a1;
+    border-right: 40px solid #96a8a1;
+    border-bottom: 40px solid #bbccc5;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+main .fishThree {
+    background-image: url(../static/fsch6.jpeg);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    margin-top: 20%;
+    border: 70px;
+    border-top: 40px solid #7c5d61;
+    border-left: 40px solid #b88a90;
+    border-right: 40px solid #b88a90;
+    border-bottom: 40px solid #e7b6bd;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+main .fishTwo {
+    background-image: url(../static/fsch5.png);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    margin-top: 20%;
+    border: 70px;
+    border-top: 40px solid #6d7a75;
+    border-left: 40px solid #96a8a1;
+    border-right: 40px solid #96a8a1;
+    border-bottom: 40px solid #bbccc5;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+
+main .fishOne {
+    background-image: url(../static/fsch4.jpeg);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    margin-top: 20%;
+    border: 70px;
+    border-top: 40px solid #7c5d61;
+    border-left: 40px solid #b88a90;
+    border-right: 40px solid #b88a90;
+    border-bottom: 40px solid #e7b6bd;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+main .sent{
+    color: rgb(7, 105, 0);
+    gap: 5px;
+    font-size: 1.8rem;
+}
+
+main .warning{
+    color: red;
+    gap: 10px;
+    font-size: 1.8rem;
+}
+
+main .mt{
+    margin-top: 40px;
+}
+
+button {
+    background-color: #b88a90;
+    color: grey;
+    border: none;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: #96a8a1;
+}
+
+h1 {
+    font-family: 'Almendra SC';
+    text-align: center;
+    font-size: 60px;
+    color:#b88a90;
+    padding: 10px;
+}
+
+h2 {
+	font-family: 'Almendra SC';
+    text-align: center;
+    font-size:40px;
+    color: #b88a90;
+    padding: 10px;
+}
+
+h3 {
+	font-family: 'Almendra SC';
+    font-weight: normal;
+    text-align: center;
+    font-size: 25px;
+    text-decoration: overline;
+    padding: 0;
+    color: #b88a90;
+    }
