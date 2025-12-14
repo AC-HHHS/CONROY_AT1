@@ -1,26 +1,42 @@
+@import url(https://fonts.googleapis.com/css?family=Almendra+SC);
+
 body{
     min-height: 90vh;
     justify-content: center;
     align-items: center;
-    background-image: 
-        linear-gradient(
-            to bottom,
-            #dcdcdc 50%,
-            #e9e9e9 30%
-        );
+    background-image: ".../static/fsch2.jpg";
+    height: 50vh;
+  	width: 100%;
+  	object-fit: cover;
+	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
     font-family: sans-serif;
+    background-color: #568797;
 }
 
+
+.top-image {
+  height: 50vh;
+  width: 100%;
+  object-fit: cover;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+ 
+ 
 *{
     margin: 0;
     padding: 0;
 }
 
 main{
-    background-color: #e9e9e9;
+    background-color: #B9c6c6;
     width: 400px;
     max-width: 400px;
-    height: 600px;
+    height: 900px;
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
@@ -37,17 +53,18 @@ main form{
 }
 main form input{
     width: 90%;
-    border: 3px solid rgba(71, 69, 69, 0.2);
+    border: 3px solid #486461;
     border-radius: 15px;
     padding: 15px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: normal;
     background-color: transparent;
     box-shadow: 2px 3px 4px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     margin-bottom: 20px;
+    font-family: 'Almendra SC';
 }
 
 
@@ -60,25 +77,29 @@ main form button{
     text-align: center;
     display: block;
     margin: 0 auto;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: bold;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(197, 255, 109);
+    background-color: #568787;
     margin-bottom: 20px;
+    color: #211b1a;
+    font-family: 'Almendra SC';
 }
 
 main p{
     margin-top: 30px;
     font-size: 25px;
-    font-weight: bold;
-    color: rgb(100, 65, 0);
+    font-weight: normal;
+    color: #334644;
     text-align: center;
     align-items: center;
+    font-family: 'Almendra SC';
+ 	
 }
 
 main .showuser {
-    background-image: url(../static/login.png);
+    background-image: url(../static/signup.png);
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -99,13 +120,15 @@ main .UnknownUser{
     background-image: url(../static/signup.png);
     background-position: center;
     background-size: cover;
-    margin-top: 40px;
+    margin-top: 10px;
+    padding-bottom: 10px;
     border-radius: 50%;
 }
 
 main h1,h2{
     text-align: center;
     margin-top: 20%;
+    font-family: 'Almendra SC';
 }
 
 
@@ -135,6 +158,7 @@ main .mt{
     main form input, main form button {
         font-size: 14px;
         padding: 12px;
+        align-items: center;
     }
 
     main p {
@@ -160,6 +184,7 @@ main .mt{
     main form input, main form button {
         font-size: 12px;
         padding: 10px;
+        align-items: center;
     }
 
     main p {
@@ -173,20 +198,31 @@ main .mt{
 }
 
 button {
-    background-color: lightsalmon;
-    color: grey;
+    background-color: #568787;
+    color: #211b1a;
     border: none;
     padding: 15px 30px;
     margin: 10px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 8px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Almendra SC'
 }
 
 button:hover {
-    background-color: salmon;
+    background-color: #486461;
 }
 
 h2 {
     padding: 10px;
+    font-weight: normal;
 }
+
+a {
+	color: #211b1a;
+	font-family: 'Almendra SC';
+    align-items: center;
+    }
