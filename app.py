@@ -8,8 +8,16 @@ app.secret_key = os.urandom(24)
 
 # simple answer key (you can build this automatically from `questions` later)
 ANSWER_KEY = {
-    "q1": "Paris",
-    "q2": "4"
+    "q1": "Two Wheels",
+    "q2": "1847",
+    "q3": "Unicode",
+    "q4": "Dandy",
+    "q5": "Maseru",
+    "q6": "13",
+    "q7": "Pigeon",
+    "q8": "30",
+    "q9": "Yes",
+    "q10": "Innsmouth"
 }
 
 
@@ -193,7 +201,15 @@ def quiz_view():
         # gather answers; if you have dynamic question ids, build this from questions
         user_answers = {
             "q1": request.form.get("q1"),
-            "q2": request.form.get("q2")
+            "q2": request.form.get("q2"),
+            "q3": request.form.get("q3"),
+            "q4": request.form.get("q4"),
+            "q5": request.form.get("q5"),
+            "q6": request.form.get("q6"),
+            "q7": request.form.get("q7"),
+            "q8": request.form.get("q8"),
+            "q9": request.form.get("q9"),
+            "q10": request.form.get("q10")
         }
 
         feedback = {}

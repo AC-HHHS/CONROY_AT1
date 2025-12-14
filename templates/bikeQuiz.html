@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Bike</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <style>
         .correct { color: green; }
         .incorrect { color: red; }
@@ -35,18 +35,75 @@
 
     <form method="POST" action="/quiz">
         <div>
-            <p>1. What is the capital of France?</p>
-            <label><input type="radio" name="q1" value="Paris"> Paris</label><br>
-            <label><input type="radio" name="q1" value="London"> London</label><br>
-            <label><input type="radio" name="q1" value="Rome"> Rome</label>
+            <p>1. What is a bike?</p>
+            <label><input type="radio" name="q1" value="Two Wheels"> Two Wheels Attached to a Frame</label><br>
+            <label><input type="radio" name="q1" value="Transport"> A Means of Transport</label><br> 
+            <label><input type="radio" name="q1" value="Human-Powered">A Human-Powered Vehicle</label>
         </div>
 
         <div>
-            <p>2. 2 + 2 = ?</p>
-            <label><input type="radio" name="q2" value="3"> 3</label><br>
-            <label><input type="radio" name="q2" value="4"> 4</label><br>
-            <label><input type="radio" name="q2" value="5"> 5</label>
+            <p>2. When did the word "Bicycle" first appear?</p>
+            <label><input type="radio" name="q2" value="1880"> 1880</label><br>
+            <label><input type="radio" name="q2" value="1868"> 1868</label><br> 
+            <label><input type="radio" name="q2" value="1847"> 1847</label>
         </div>
+
+        <div>
+            <p>3. What is a Unicode?</p>
+            <label><input type="radio" name="q3" value="Unique"> Unique Character Encoding Standard</label><br>
+            <label><input type="radio" name="q3" value="University"> University Level Decoding Scheme</label><br>
+            <label><input type="radio" name="q3" value="Unicode"> Universal Character Encoding Standard</label> 
+        </div>
+
+        <div>
+            <p>4. What was the first human means of transport to use two wheels called?</p>
+            <label><input type="radio" name="q4" value="Darty"> Darty Horse</label><br>
+            <label><input type="radio" name="q4" value="Dandy"> Dandy Horse</label><br>
+            <label><input type="radio" name="q4" value="Daisy"> Daisy Horse</label>
+        </div>
+
+        <div>
+            <p>5. What is the capital of Lesotho?</p>
+            <label><input type="radio" name="q5" value="Maseru"> Maseru</label><br> 
+            <label><input type="radio" name="q5" value="Lusaka"> Lusaka</label><br>
+            <label><input type="radio" name="q5" value="Luanda"> Luanda</label>
+        </div>
+
+        <div>
+            <p>6. How many <em>italicised</em> words are there?</p>
+            <label><input type="radio" name="q6" value="14"> 14</label><br>
+            <label><input type="radio" name="q6" value="13"> 13</label><br> 
+            <label><input type="radio" name="q6" value="12"> 12</label>
+        </div>
+
+        <div>
+            <p>7. What bird is mentioned in the text?</p>
+            <label><input type="radio" name="q7" value="Parakeet"> Parakeet</label><br>
+            <label><input type="radio" name="q7" value="Eagle"> Eagle</label><br>
+            <label><input type="radio" name="q7" value="Pigeon"> Pigeon</label> 
+        </div>
+
+        <div>
+            <p>8. How many people and Places are mentioned in the text?</p>
+            <label><input type="radio" name="q8" value="30"> 30</label><br> 
+            <label><input type="radio" name="q8" value="35"> 35</label><br>
+            <label><input type="radio" name="q8" value="28"> 28</label>
+        </div>
+
+        <div>
+            <p>9. Are you a fish?</p>
+            <label><input type="radio" name="q9" value="Yes"> Yes</label><br> 
+            <label><input type="radio" name="q9" value="No"> No</label><br>
+            <label><input type="radio" name="q9" value="Perchance"> Perchance</label>
+        </div>
+
+        <div>
+            <p>10. ?</p>
+            <label><input type="radio" name="q10" value="Kingsport"> Kingsport</label><br> 
+            <label><input type="radio" name="q10" value="Dunwich"> Dunwich</label><br>
+            <label><input type="radio" name="q10" value="Innsmouth"> Innsmouth</label> 
+        </div>
+
 
         <button type="submit">Submit</button>
     </form>
@@ -55,7 +112,15 @@
         <h2>Results:</h2>
         <p class="{{ results.q1 }}">{{ feedback.q1 }}</p>
         <p class="{{ results.q2 }}">{{ feedback.q2 }}</p>
-        <h3>Your score: {{ score }}/2</h3>
+        <p class="{{ results.q3 }}">{{ feedback.q3 }}</p>
+        <p class="{{ results.q4 }}">{{ feedback.q4 }}</p>
+        <p class="{{ results.q5 }}">{{ feedback.q5 }}</p>
+        <p class="{{ results.q6 }}">{{ feedback.q6 }}</p>
+        <p class="{{ results.q7 }}">{{ feedback.q7 }}</p>
+        <p class="{{ results.q8 }}">{{ feedback.q8 }}</p>
+        <p class="{{ results.q9 }}">{{ feedback.q9 }}</p>
+        <p class="{{ results.q10 }}">{{ feedback.q10 }}</p>
+        <h3>Your score: {{ score }}/10</h3>
     {% endif %}
 
 </body>
