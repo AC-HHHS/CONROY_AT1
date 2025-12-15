@@ -119,7 +119,7 @@ def make_admin(email):
     cursor = connection.cursor()
 
     cursor.execute(
-        "UPDATE USER SET is_admin = 1 WHERE email = ?", 
+        "UPDATE USERS SET is_admin = 1 WHERE email = ?", 
         (email,)
     )
 
