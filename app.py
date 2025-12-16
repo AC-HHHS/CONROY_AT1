@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import os
 from question import questions
+from waitress import serve
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -309,4 +310,4 @@ def fish3():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    serve(app, host="0.0.0.0", port=8000)
