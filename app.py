@@ -85,18 +85,21 @@ def home():
 def admin():
     if not session.get("is_admin"):
         return redirect(url_for("login"))
+    # Fetch collected DATA from CollectedData.db
+    data_conn = sqlite3.connect("CollectedData.db")
+    data_cursor = data_conn.cursor()
 
-    connection = sqlite3.connect("CollectedData.db")
-    cursor = connection.cursor()
+    data_cursor.execute("SELECT * FROM DATA")
+    data_rows = data_cursor.fetchall()
+    data_columns = [description[0] for description in data_cursor.description]
+    data_conn.close()
 
-    cursor.execute("SELECT * FROM DATA")
-    data_rows = cursor.fetchall()
-    data_columns = [description[0] for description in cursor.description]
-
-    cursor.execute("SELECT first_name, last_name, email, is_admin FROM USERS")
-    users = cursor.fetchall()
-
-    connection.close()
+    # Fetch USERS from the login database
+    users_conn = sqlite3.connect("LoginData.db")
+    users_cursor = users_conn.cursor()
+    users_cursor.execute("SELECT first_name, last_name, email, is_admin FROM USERS")
+    users = users_cursor.fetchall()
+    users_conn.close()
 
     return render_template(
         "adminHome.html",
@@ -115,7 +118,7 @@ def make_admin(email):
     if not session.get("is_admin"):
         return redirect(url_for("login"))
 
-    connection = sqlite3.connection("LoginData.db")
+    connection = sqlite3.connect("LoginData.db")
     cursor = connection.cursor()
 
     cursor.execute(
@@ -142,7 +145,7 @@ def admin_users():
 
     connection.close()
 
-    return render_template("admin_users.html", users=users)
+    return render_template("adminHome.html", users=users)
 
 
 #END credits
